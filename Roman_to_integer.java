@@ -30,13 +30,10 @@ class Solution {
             }
             else
             {
-                total -= getValue(charRoman[i]); 
-
+                total -= getValue(charRoman[i]);
             }
-
         }
-         total += getValue(charRoman[charRoman.length -1]); 
- 
+        total += getValue(charRoman[charRoman.length -1]); 
         return total;
     }
 }

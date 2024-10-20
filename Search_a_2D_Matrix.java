@@ -1,4 +1,56 @@
 class Solution {
+    boolean binarySearch(int[]nums, int start, int end, int target)
+    {
+        if(start > end)
+        {
+            return false;
+        }
+        int mid = (start + end) / 2;
+        if(nums[mid] == target)
+        {
+            return true;
+        }
+        if(nums[mid] > target)
+        {
+            return binarySearch(nums, start, mid-1, target);
+        }
+        return binarySearch(nums, mid+1, end, target);
+    }
+    boolean binarySearchInRow(int[][] matrix, int start, int end, int target)
+    {
+        boolean returnvalue = false;
+        if(start > end)
+        {
+            return false;
+        }
+        int mid = (start + end) / 2;
+        if(matrix[mid][0] == target)
+        {
+            return true;
+        }
+        if(matrix[mid][0] < target)
+        {
+            if(matrix[mid][matrix[mid].length -1] >= target)
+            {
+                return binarySearch(matrix[mid], 0, matrix[mid].length -1, target);
+            }
+            else
+            {
+                return binarySearchInRow(matrix, mid+1, end, target);
+            }
+             
+        }
+         return binarySearchInRow(matrix, start, mid-1, target);
+    }
+    
+    public boolean searchMatrix(int[][] matrix, int target) {
+        return binarySearchInRow(matrix, 0, matrix.length -1, target);
+    }
+}
+
+/* First try: wrong way(but works)
+
+class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         boolean isNonDecreasing = true;
         boolean isTargetExistiert = false;
@@ -37,4 +89,4 @@ class Solution {
             return false;
         }
     }
-}
+}*/
